@@ -1,0 +1,44 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
+task(type: Wrapper) {
+    gradleVersion = '7.0.2'
+}
+
+group 'com.babichev'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+ext.mainClassExt = 'com.babichev.GradleImplementation'
+
+application {
+    mainClass = mainClassExt
+}
+
+class HelloTask extends DefaultTask {
+    @TaskAction
+    def hello() {
+        println "Hello from Gradle task!"
+    }
+}
+
+tasks.register("greeting", HelloTask)
+
