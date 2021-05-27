@@ -42,3 +42,8 @@ class HelloTask extends DefaultTask {
 
 tasks.register("greeting", HelloTask)
 
+greeting.dependsOn.add(run)
+build.dependsOn.add(greeting)
+
+
+
